@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Important Question</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+font-family:Arial;
+background:linear-gradient(270deg,#ff9a9e,#fad0c4,#a18cd1,#fbc2eb);
+background-size:600% 600%;
+animation:bgmove 12s ease infinite;
+overflow:hidden;
+}
+
+@keyframes bgmove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+h1{
+font-size:42px;
+color:white;
+text-shadow:0 0 12px rgba(0,0,0,0.4);
+margin-bottom:20px;
+}
+
+button{
+padding:15px 35px;
+font-size:20px;
+border:none;
+border-radius:12px;
+margin:15px;
+cursor:pointer;
+transition:0.2s;
+}
+
+#yes{
+background:#00ff88;
+box-shadow:0 0 20px #00ff88;
+}
+
+#yes:hover{
+transform:scale(1.15);
+}
+
+#no{
+background:#ff4d4d;
+position:absolute;
+box-shadow:0 0 20px #ff4d4d;
+}
+
+#message{
+font-size:32px;
+color:white;
+margin-top:20px;
+}
+
+#cat{
+display:none;
+width:220px;
+margin-top:20px;
+animation:dance 0.6s infinite;
+}
+
+/* cat dance */
+@keyframes dance{
+0%{transform:rotate(-6deg);}
+50%{transform:rotate(6deg);}
+100%{transform:rotate(-6deg);}
+}
+
+/* hearts */
+.heart{
+position:absolute;
+color:red;
+font-size:20px;
+animation:floatUp 4s linear forwards;
+}
+
+@keyframes floatUp{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-600px);opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>IS ARYAN SMART?
+
+<div>
+<button id="yes" onclick="yes()">YES</button>
+<button id="no" onmouseover="moveNo()">NO</button>
+</div>
+
+<p id="message"></p>
+
+<img id="cat" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+
+<script>
+
+let yesSize = 1;
+let noSize = 1;
+
+function yes(){
+
+document.getElementById("message").innerText =
+"Ofcourse the answer is yes";
+
+document.getElementById("cat").style.display="block";
+
+confetti();
+hearts();
+}
+
+function moveNo(){
+
+let noButton=document.getElementById("no");
+let yesButton=document.getElementById("yes");
+
+var x=Math.random()*(window.innerWidth-100);
+var y=Math.random()*(window.innerHeight-60);
+
+noButton.style.left=x+"px";
+noButton.style.top=y+"px";
+
+noSize-=0.08;
+yesSize+=0.12;
+
+noButton.style.transform="scale("+noSize+")";
+yesButton.style.transform="scale("+yesSize+")";
+}
+
+function confetti(){
+
+for(let i=0;i<80;i++){
+
+let c=document.createElement("div");
+
+c.style.position="absolute";
+c.style.width="8px";
+c.style.height="8px";
+c.style.background="hsl("+Math.random()*360+"deg,100%,50%)";
+c.style.left=Math.random()*window.innerWidth+"px";
+c.style.top="-10px";
+
+document.body.appendChild(c);
+
+setTimeout(()=>{
+c.style.transition="top 2s linear";
+c.style.top=window.innerHeight+"px";
+},10);
+
+}
+}
+
+function hearts(){
+
+for(let i=0;i<25;i++){
+
+let h=document.createElement("div");
+h.className="heart";
+h.innerText="❤";
+
+h.style.left=Math.random()*window.innerWidth+"px";
+h.style.top=window.innerHeight+"px";
+
+document.body.appendChild(h);
+
+setTimeout(()=>{
+h.remove();
+},4000);
+
+}
+}
+
+</script>
+
+</body>
+
+</html>
